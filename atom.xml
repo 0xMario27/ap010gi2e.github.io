@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ap010gi2e.github.io/"/>
-  <updated>2017-12-10T05:43:58.840Z</updated>
+  <updated>2017-12-10T05:48:34.429Z</updated>
   <id>http://ap010gi2e.github.io/</id>
   
   <author>
@@ -18,10 +18,10 @@
   
   <entry>
     <title>进、线程间通信</title>
-    <link href="http://ap010gi2e.github.io/2017/12/10/cjb0ch9ff0000lys6me5a1b6g/"/>
-    <id>http://ap010gi2e.github.io/2017/12/10/cjb0ch9ff0000lys6me5a1b6g/</id>
+    <link href="http://ap010gi2e.github.io/2017/12/10/cjb0em3o50000pcs6qt8tkt10/"/>
+    <id>http://ap010gi2e.github.io/2017/12/10/cjb0em3o50000pcs6qt8tkt10/</id>
     <published>2017-12-10T05:12:58.000Z</published>
-    <updated>2017-12-10T05:43:58.840Z</updated>
+    <updated>2017-12-10T05:48:34.429Z</updated>
     
     <content type="html"><![CDATA[<h1 id="一、进程间通信"><a href="#一、进程间通信" class="headerlink" title="一、进程间通信"></a>一、进程间通信</h1><ul><li>管道(pipe):一种半双工的通信方式。数据单向传输。只能在具有亲缘关系的进程间使用。</li><li>有名管道(namepipe):区别在于它允许非亲缘关系的进程间通信。</li><li>信号量(semaphore):是一种计数器，可以控制多个进程对共享资源的访问。常作为一种锁机制，用来防止多个进程同时访问共享资源。主要用作进程间以及同一进程内不同线程之间的同步手段。</li><li>信号(signal):比较复杂的通信方式，用于通知接收进程某个事件已经发生。</li><li>消息队列(messagequeue):由消息的链表存放在内核中，并由消息队列标识符标识。克服了信号传递信息少，管道只能承载无格式字节流以及缓冲区大小受限等问题。</li><li>共享内存(shared memory):通过映射一段能被其他进程访问的内存。由一个进程创建，多个进程共享访问。是最快的IPC方式。常常与其他通信机制配合使用。如信号量等，来实现进程间的同步和通信。</li><li>套接字(socket):可用于不同之间的进程通信。</li></ul><h1 id="二、线程间通信"><a href="#二、线程间通信" class="headerlink" title="二、线程间通信"></a>二、线程间通信</h1><ul><li>锁机制<ul><li>互斥锁:一种同步机制，防止多个线程共同操作同一共享资源。</li><li>读写锁:允许多个线程同时读取共享数据，但是对于写操作则是互斥的。</li><li>条件变量:可以以原子的方式阻塞进程，直到某个特定条件为真时为止。对条件的测试是在互斥锁的保护下进行的。条件变量始终与互斥锁一起使用。</li></ul></li><li>信号量机制:包括无名线程信号量和命名线程信号量。</li><li>信号机制:类似进程间的信号处理。</li><li>线程间的通信目的主要是用于线程同步，所以线程没有像进程通信中的用于数据交换的通信机制。</li></ul>]]></content>
     
