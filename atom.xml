@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ap010gi2e.github.io/"/>
-  <updated>2017-12-10T12:00:53.100Z</updated>
+  <updated>2017-12-10T12:11:12.778Z</updated>
   <id>http://ap010gi2e.github.io/</id>
   
   <author>
@@ -18,12 +18,12 @@
   
   <entry>
     <title>同步、异步、阻塞、非阻塞</title>
-    <link href="http://ap010gi2e.github.io/2017/12/10/cjb0pxlf100003gs69eid8zec/"/>
-    <id>http://ap010gi2e.github.io/2017/12/10/cjb0pxlf100003gs69eid8zec/</id>
+    <link href="http://ap010gi2e.github.io/2017/12/10/cjb0qajm400005ws6rft8ho7i/"/>
+    <id>http://ap010gi2e.github.io/2017/12/10/cjb0qajm400005ws6rft8ho7i/</id>
     <published>2017-12-10T09:20:42.000Z</published>
-    <updated>2017-12-10T12:00:53.100Z</updated>
+    <updated>2017-12-10T12:11:12.778Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="阻塞"><a href="#阻塞" class="headerlink" title="阻塞"></a>阻塞</h1><ul><li>阻塞是指在调用结果返回之前，当前的线程会被挂起。函数只有得到返回结果的时候才会返回。</li></ul><h1 id="非阻塞"><a href="#非阻塞" class="headerlink" title="非阻塞"></a>非阻塞</h1><ul><li>非阻塞和阻塞是相对的概念，指在没有得到结果之前，该函数不会阻塞当前线程，而会立刻返回。</li></ul><h1 id="同步"><a href="#同步" class="headerlink" title="同步"></a>同步</h1><ul><li>所谓同步，就是在发出一个功能调用时，在没有得到结果之前，该调用就不返回。</li></ul><h1 id="异步"><a href="#异步" class="headerlink" title="异步"></a>异步</h1><ul><li>异步的概念和同步相对。当一个异步过程调用发出后，调用者不能立刻得到结果。实际处理这个调用的部件在完成后，通过状态、通知和回调来通知调用者。</li></ul>]]></content>
+    <content type="html"><![CDATA[<h1 id="阻塞"><a href="#阻塞" class="headerlink" title="阻塞"></a>阻塞</h1><ul><li>阻塞是指在调用结果返回之前，当前的线程会被挂起。函数只有得到返回结果的时候才会返回。</li></ul><h1 id="非阻塞"><a href="#非阻塞" class="headerlink" title="非阻塞"></a>非阻塞</h1><ul><li>非阻塞和阻塞是相对的概念，指在没有得到结果之前，该函数不会阻塞当前线程，而会立刻返回。</li></ul><h1 id="同步"><a href="#同步" class="headerlink" title="同步"></a>同步</h1><ul><li>所谓同步，就是在发出一个功能调用时，在没有得到结果之前，该调用就不返回。</li></ul><h1 id="异步"><a href="#异步" class="headerlink" title="异步"></a>异步</h1><ul><li>异步的概念和同步相对。当一个异步过程调用发出后，调用者不能立刻得到结果。实际处理这个调用的部件在完成后，通过状态、通知和回调来通知调用者。</li></ul><h1 id="对象的阻塞模式和阻塞函数调用"><a href="#对象的阻塞模式和阻塞函数调用" class="headerlink" title="对象的阻塞模式和阻塞函数调用"></a>对象的阻塞模式和阻塞函数调用</h1><ul><li>对象是否处于阻塞模式和函数是不是阻塞调用有很强的相关性，但是并不是一一对应的。阻塞对象上可以有非阻塞的调用方式，我们可以通过一定的API去轮询状态，在适当的时候调用阻塞函数，就可以避免阻塞。而对于非阻塞对象，调用特殊的函数也可以进入阻塞调用。函数select就是这样的一个例子。</li></ul>]]></content>
     
     <summary type="html">
     
@@ -42,8 +42,8 @@
   
   <entry>
     <title>进程和线程</title>
-    <link href="http://ap010gi2e.github.io/2017/12/10/cjb0pxlf500013gs60pnn8mhl/"/>
-    <id>http://ap010gi2e.github.io/2017/12/10/cjb0pxlf500013gs60pnn8mhl/</id>
+    <link href="http://ap010gi2e.github.io/2017/12/10/cjb0qajma00025ws6m11uye8f/"/>
+    <id>http://ap010gi2e.github.io/2017/12/10/cjb0qajma00025ws6m11uye8f/</id>
     <published>2017-12-10T06:49:24.000Z</published>
     <updated>2017-12-10T06:52:14.769Z</updated>
     
@@ -65,8 +65,8 @@
   
   <entry>
     <title>进、线程间通信</title>
-    <link href="http://ap010gi2e.github.io/2017/12/10/cjb0pxlf700023gs6arwhttcf/"/>
-    <id>http://ap010gi2e.github.io/2017/12/10/cjb0pxlf700023gs6arwhttcf/</id>
+    <link href="http://ap010gi2e.github.io/2017/12/10/cjb0qajm800015ws6o1m7xlbj/"/>
+    <id>http://ap010gi2e.github.io/2017/12/10/cjb0qajm800015ws6o1m7xlbj/</id>
     <published>2017-12-10T05:12:58.000Z</published>
     <updated>2017-12-10T05:48:34.429Z</updated>
     
