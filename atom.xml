@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ap010gi2e.github.io/"/>
-  <updated>2017-12-10T13:09:57.352Z</updated>
+  <updated>2017-12-12T15:50:33.658Z</updated>
   <id>http://ap010gi2e.github.io/</id>
   
   <author>
@@ -17,9 +17,31 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Linux进程基础</title>
+    <link href="http://ap010gi2e.github.io/2017/12/12/cjb3t159b00044ss62hi21y0e/"/>
+    <id>http://ap010gi2e.github.io/2017/12/12/cjb3t159b00044ss62hi21y0e/</id>
+    <published>2017-12-12T15:22:35.000Z</published>
+    <updated>2017-12-12T15:50:33.658Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="指令和程序"><a href="#指令和程序" class="headerlink" title="指令和程序"></a>指令和程序</h2><ul><li>一些最基础的计算机动作被称为‘指令’,而程序就是一系列的指令所构成的集合.通过程序,就可以完成一些复杂的操作了.</li></ul><h2 id="程序和进程"><a href="#程序和进程" class="headerlink" title="程序和进程"></a>程序和进程</h2><ul><li>进程是程序的一个具体实现.进程可以理解为是程序运行的过程.而同一个程序可以执行多次,每次都可以在内存中独立自己的空间.从而产生多个程序进程.不同的进程还可以拥有各自独立的IO接口.</li><li>而操作系统的一个重要的功能就是为了进程而提供方便.比如为进程分配内存空间,管理进程的相关信息等功能.</li><li>进程可以使用命令ps查看,相关参数自己查看.</li></ul><h2 id="创建进程"><a href="#创建进程" class="headerlink" title="创建进程"></a>创建进程</h2><ul><li>Linux内核只建立了一个init进程.内核并不提供直接建立新进程的系统调用.所有的其他进程都是init进程通过fork机制建立的.也就是说新的线程要通过老的进程自己复制自己得到,而这就是fork.fork是一个系统调用.进程存活于内存中.每个进程都在内存中分配有属于自己的空间.当进程fork的时候,Linux内存中会分配一个新的内存空间给新的进程,并将老的进程空间中的内容复制给新的空间中,然后两个进程同时运行.老进程就是父线程.而新进程就是子进程.</li><li>一个进程除了有PID之外,还会有一个PPID来存储父进程的PID.</li><li>fork通常作为一个系统调用执行.它会有两次返回,将子进程的PID返回给父进程,0返回给子进程.实际上,子进程总是可以通过PPID查询到自己的父进程.</li><li>当一个PID为0的时候,就说明该进程是一个子进程.</li><li>而当一个PID为一个正整数的时候,说明该进程是一个父进程.</li></ul><h2 id="子进程的终结"><a href="#子进程的终结" class="headerlink" title="子进程的终结"></a>子进程的终结</h2><blockquote><p>插入一段自己的理解,可能以后也是为了更正自己或者提醒自己,我未来一定会问我自己为什么是子进程的终结,而没有提到父进程的终结.因为Linux内核提供init进程之后,所有的进程都是init的子进程.所以我的理解就是,没有关闭父进程的情况.还有,若是多进程的话,相对于多个该程序的子进程来讲,是有一个主进程的.所以这个主进程也是一个子进程.(至少目前我是这么认为的)</p></blockquote><ul><li>当一个子进程终结的时候,它就会通知父进程.并且会清空自己在内存中占用的空间,并且在内存中留下自己的退出信息.<ul><li>如果退出顺利的话,这个退出信息为0</li><li>如果退出不顺利的话,这个退出信息为正整数</li></ul></li><li>在这个退出信息中,会解释该进程为什么会退出.</li><li>此时,父进程有有义务对子进程使用wait系统调用.这个wait函数能够从内核中取出子进程的退出信息,并清空该信息在内存中占用的空间.</li><li>但是也有特殊情况.当父进程早于子进程终结的话,子进程就失去了上层关系.成了孤儿进程,而孤儿进程此时会过继给init进程,所以这个时候init进程负责该子进程的wait函数调用.</li><li>还有一种可能性,就是退出的时候退出信息还是会留在内核中,这种就是所谓的僵尸进程.僵尸进程会占用内存空间.</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;指令和程序&quot;&gt;&lt;a href=&quot;#指令和程序&quot; class=&quot;headerlink&quot; title=&quot;指令和程序&quot;&gt;&lt;/a&gt;指令和程序&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;一些最基础的计算机动作被称为‘指令’,而程序就是一系列的指令所构成的集合.通过程序,就可以完成一些复杂的
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>文件描述符</title>
-    <link href="http://ap010gi2e.github.io/2017/12/10/cjb0seb9k0000g7s6roo06690/"/>
-    <id>http://ap010gi2e.github.io/2017/12/10/cjb0seb9k0000g7s6roo06690/</id>
+    <link href="http://ap010gi2e.github.io/2017/12/10/cjb3t159800014ss6k13sppwh/"/>
+    <id>http://ap010gi2e.github.io/2017/12/10/cjb3t159800014ss6k13sppwh/</id>
     <published>2017-12-10T12:35:54.000Z</published>
     <updated>2017-12-10T13:09:57.352Z</updated>
     
@@ -41,8 +63,8 @@
   
   <entry>
     <title>同步、异步、阻塞、非阻塞</title>
-    <link href="http://ap010gi2e.github.io/2017/12/10/cjb0seb9o0001g7s6l5t19rb4/"/>
-    <id>http://ap010gi2e.github.io/2017/12/10/cjb0seb9o0001g7s6l5t19rb4/</id>
+    <link href="http://ap010gi2e.github.io/2017/12/10/cjb3t159500004ss6ihlz2bq9/"/>
+    <id>http://ap010gi2e.github.io/2017/12/10/cjb3t159500004ss6ihlz2bq9/</id>
     <published>2017-12-10T09:20:42.000Z</published>
     <updated>2017-12-10T13:10:03.070Z</updated>
     
@@ -65,8 +87,8 @@
   
   <entry>
     <title>进程和线程</title>
-    <link href="http://ap010gi2e.github.io/2017/12/10/cjb0seb9q0003g7s6vme5h6pp/"/>
-    <id>http://ap010gi2e.github.io/2017/12/10/cjb0seb9q0003g7s6vme5h6pp/</id>
+    <link href="http://ap010gi2e.github.io/2017/12/10/cjb3t159a00034ss626586bgv/"/>
+    <id>http://ap010gi2e.github.io/2017/12/10/cjb3t159a00034ss626586bgv/</id>
     <published>2017-12-10T06:49:24.000Z</published>
     <updated>2017-12-10T13:10:07.016Z</updated>
     
@@ -88,8 +110,8 @@
   
   <entry>
     <title>进、线程间通信</title>
-    <link href="http://ap010gi2e.github.io/2017/12/10/cjb0seb9p0002g7s6pqbsoy3k/"/>
-    <id>http://ap010gi2e.github.io/2017/12/10/cjb0seb9p0002g7s6pqbsoy3k/</id>
+    <link href="http://ap010gi2e.github.io/2017/12/10/cjb3t159900024ss69tqnhpev/"/>
+    <id>http://ap010gi2e.github.io/2017/12/10/cjb3t159900024ss69tqnhpev/</id>
     <published>2017-12-10T05:12:58.000Z</published>
     <updated>2017-12-10T13:10:10.117Z</updated>
     
