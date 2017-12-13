@@ -1,0 +1,24 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Linux文本流 · ap010gi2e</title><meta name="description" content="Linux文本流 - ap010gi2e"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://ap010gi2e.github.io/atom.xml" title="ap010gi2e"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/ap010gi2e" target="_blank" class="nav-list-link">GITHUB</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">Linux文本流</h1><div class="post-info">Dec 13, 2017</div><div class="post-content"><h2 id="Linux文本流"><a href="#Linux文本流" class="headerlink" title="Linux文本流"></a>Linux文本流</h2><h2 id="文本流"><a href="#文本流" class="headerlink" title="文本流"></a>文本流</h2><p>当unix执行一个程序的时候,会自动打开三个流,标准输入、标准输出、标准错误.对于一个程序来说尽管它总是会打开这三个流,但是它会根据需要实用,并不一定要使用.</p>
+<ul>
+<li><figure class="highlight plain"><figcaption><span>命令是可以列出目录内容的命令,其结果这里作为一个标准输入的流.</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">``` shell</span><br><span class="line">$ ls</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>因为命令行工具也是一个程序,所以当输入命令之后,输出的文本流会显示到屏幕上.</p>
+<ul>
+<li>当然还可以重定向文本流的输出.比如在命令行可以使用<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">``` shell</span><br><span class="line">$ ls &gt; a.txt</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>该命令会将原本要输出到屏幕的文本流重定向到文件中.</p>
+<ul>
+<li>还有一个<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* ```echo```命令会将文本流导向标准输出.其实和```ls```同理,只不过一个是得到的结果的文本流,一个是自己定义的文本流.只是例子,重点关注在文本流这个概念上.</span><br><span class="line"></span><br><span class="line">* 也可以使用```&lt;```来改变标准输入,比如```cat```命令.</span><br><span class="line">``` shell</span><br><span class="line">$ cat &lt; a.txt</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>我们将<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">``` shell</span><br><span class="line">$ cat &lt; a.txt &gt; b.txt</span><br></pre></td></tr></table></figure></p>
+<p>这样a.txt的内容就会被复制到b.txt中</p>
+<ul>
+<li>另一个<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">``` shell</span><br><span class="line">$ cd nodir &gt;&amp; a.txt</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>会将错误信息和标准输出都重定向到a.txt</p>
+<ul>
+<li>当然也有只想重定向标准错误的命令<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">``` shell</span><br><span class="line">$ cd nodir 2&gt; a.txt &gt; b.txt</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>这样,标准错误就被重定向到a.txt,而标准输出则输出到了b.txt</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2017/12/12/cjb4nfr8n0005hes6o441jmqj/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2017 <a href="http://ap010gi2e.github.io">ap010gi2e</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>
