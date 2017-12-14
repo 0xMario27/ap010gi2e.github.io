@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ap010gi2e.github.io/"/>
-  <updated>2017-12-14T06:56:04.322Z</updated>
+  <updated>2017-12-14T12:32:14.350Z</updated>
   <id>http://ap010gi2e.github.io/</id>
   
   <author>
@@ -17,9 +17,31 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Linux Shell</title>
+    <link href="http://ap010gi2e.github.io/2017/12/14/cjb6fravl0006hps65ciuag4r/"/>
+    <id>http://ap010gi2e.github.io/2017/12/14/cjb6fravl0006hps65ciuag4r/</id>
+    <published>2017-12-14T11:59:42.000Z</published>
+    <updated>2017-12-14T12:32:14.350Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="什么是Shell"><a href="#什么是Shell" class="headerlink" title="什么是Shell"></a>什么是Shell</h2><ul><li>Shell是文本解释器程序的统称。常见的Shell有sh、bash、ksh、rsh、csh等</li><li>Shell命令分为内建命令和外部可执行文件。</li><li><code>which date</code>可以查看到命令对应的可执行文件的路径。</li><li><code>alias</code>可以为命令创建别名。</li><li><code>type</code>命令可以了解命令类型</li><li><code>echo $SHELL</code>可以了解当前所使用的shell</li></ul><h2 id="命令行和参数"><a href="#命令行和参数" class="headerlink" title="命令行和参数"></a>命令行和参数</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">uname -m -r</span><br><span class="line">uname -mr</span><br></pre></td></tr></table></figure><blockquote><p>上述两条命令效果是相同的。<br>这种一个<code>-</code>的选项叫做短选项，引领的是一个字母<br>另一种两个<code>--</code>的选项叫做长选项，引领的是一个英文单词<br>选项可以携带参数，短选项使用空格链接。长选项使用等号链接<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span>sudo date --set="1999-01-01 08:00:00"</span><br><span class="line"><span class="meta">$</span>sudo date -s "1999-01-01 08:00:00"</span><br></pre></td></tr></table></figure></p></blockquote><h2 id="探索新命令的方法"><a href="#探索新命令的方法" class="headerlink" title="探索新命令的方法"></a>探索新命令的方法</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span>whatis ls //一句话简短概述</span><br><span class="line"><span class="meta">$</span>man ls    //帮助手册</span><br><span class="line"><span class="meta">$</span>info ls   //更详细的帮助信息</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;什么是Shell&quot;&gt;&lt;a href=&quot;#什么是Shell&quot; class=&quot;headerlink&quot; title=&quot;什么是Shell&quot;&gt;&lt;/a&gt;什么是Shell&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Shell是文本解释器程序的统称。常见的Shell有sh、bash、ksh、rs
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>python subprocess模块的一点笔记</title>
-    <link href="http://ap010gi2e.github.io/2017/12/14/cjb64vvyg0006vqs64ajjn6qh/"/>
-    <id>http://ap010gi2e.github.io/2017/12/14/cjb64vvyg0006vqs64ajjn6qh/</id>
+    <link href="http://ap010gi2e.github.io/2017/12/14/cjb6fravm0007hps6i84s1ydy/"/>
+    <id>http://ap010gi2e.github.io/2017/12/14/cjb6fravm0007hps6i84s1ydy/</id>
     <published>2017-12-13T18:10:06.000Z</published>
     <updated>2017-12-14T06:56:04.322Z</updated>
     
@@ -39,8 +61,8 @@
   
   <entry>
     <title>Linux文本流</title>
-    <link href="http://ap010gi2e.github.io/2017/12/13/cjb64vvy90005vqs6wpenzklz/"/>
-    <id>http://ap010gi2e.github.io/2017/12/13/cjb64vvy90005vqs6wpenzklz/</id>
+    <link href="http://ap010gi2e.github.io/2017/12/13/cjb6fravg0005hps6nlgnfnl3/"/>
+    <id>http://ap010gi2e.github.io/2017/12/13/cjb6fravg0005hps6nlgnfnl3/</id>
     <published>2017-12-12T16:44:09.000Z</published>
     <updated>2017-12-13T06:56:00.908Z</updated>
     
@@ -60,8 +82,8 @@
   
   <entry>
     <title>Linux进程基础</title>
-    <link href="http://ap010gi2e.github.io/2017/12/12/cjb64vvy80004vqs6nc8dm5hl/"/>
-    <id>http://ap010gi2e.github.io/2017/12/12/cjb64vvy80004vqs6nc8dm5hl/</id>
+    <link href="http://ap010gi2e.github.io/2017/12/12/cjb6fravf0004hps630lxhsik/"/>
+    <id>http://ap010gi2e.github.io/2017/12/12/cjb6fravf0004hps630lxhsik/</id>
     <published>2017-12-12T15:22:35.000Z</published>
     <updated>2017-12-12T15:50:33.658Z</updated>
     
@@ -82,8 +104,8 @@
   
   <entry>
     <title>文件描述符</title>
-    <link href="http://ap010gi2e.github.io/2017/12/10/cjb64vvy20001vqs6b8w5vw42/"/>
-    <id>http://ap010gi2e.github.io/2017/12/10/cjb64vvy20001vqs6b8w5vw42/</id>
+    <link href="http://ap010gi2e.github.io/2017/12/10/cjb6fravb0003hps6fi4bkkdl/"/>
+    <id>http://ap010gi2e.github.io/2017/12/10/cjb6fravb0003hps6fi4bkkdl/</id>
     <published>2017-12-10T12:35:54.000Z</published>
     <updated>2017-12-10T13:09:57.352Z</updated>
     
@@ -105,8 +127,8 @@
   
   <entry>
     <title>同步、异步、阻塞、非阻塞</title>
-    <link href="http://ap010gi2e.github.io/2017/12/10/cjb64vvxy0000vqs65heriki7/"/>
-    <id>http://ap010gi2e.github.io/2017/12/10/cjb64vvxy0000vqs65heriki7/</id>
+    <link href="http://ap010gi2e.github.io/2017/12/10/cjb6frav40000hps6qqcv8wsh/"/>
+    <id>http://ap010gi2e.github.io/2017/12/10/cjb6frav40000hps6qqcv8wsh/</id>
     <published>2017-12-10T09:20:42.000Z</published>
     <updated>2017-12-10T13:10:03.070Z</updated>
     
@@ -129,8 +151,8 @@
   
   <entry>
     <title>进程和线程</title>
-    <link href="http://ap010gi2e.github.io/2017/12/10/cjb64vvy40003vqs6qve8bi5q/"/>
-    <id>http://ap010gi2e.github.io/2017/12/10/cjb64vvy40003vqs6qve8bi5q/</id>
+    <link href="http://ap010gi2e.github.io/2017/12/10/cjb6frav70001hps62q1iw772/"/>
+    <id>http://ap010gi2e.github.io/2017/12/10/cjb6frav70001hps62q1iw772/</id>
     <published>2017-12-10T06:49:24.000Z</published>
     <updated>2017-12-10T13:10:07.016Z</updated>
     
@@ -152,8 +174,8 @@
   
   <entry>
     <title>进、线程间通信</title>
-    <link href="http://ap010gi2e.github.io/2017/12/10/cjb64vvy30002vqs6vfdcsemr/"/>
-    <id>http://ap010gi2e.github.io/2017/12/10/cjb64vvy30002vqs6vfdcsemr/</id>
+    <link href="http://ap010gi2e.github.io/2017/12/10/cjb6frav90002hps65zs71wnq/"/>
+    <id>http://ap010gi2e.github.io/2017/12/10/cjb6frav90002hps65zs71wnq/</id>
     <published>2017-12-10T05:12:58.000Z</published>
     <updated>2017-12-10T13:10:10.117Z</updated>
     

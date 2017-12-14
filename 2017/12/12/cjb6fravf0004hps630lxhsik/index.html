@@ -1,0 +1,30 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Linux进程基础 · ap010gi2e</title><meta name="description" content="Linux进程基础 - ap010gi2e"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://ap010gi2e.github.io/atom.xml" title="ap010gi2e"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/ap010gi2e" target="_blank" class="nav-list-link">GITHUB</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">Linux进程基础</h1><div class="post-info">Dec 12, 2017</div><div class="post-content"><h2 id="指令和程序"><a href="#指令和程序" class="headerlink" title="指令和程序"></a>指令和程序</h2><ul>
+<li>一些最基础的计算机动作被称为‘指令’,而程序就是一系列的指令所构成的集合.通过程序,就可以完成一些复杂的操作了.</li>
+</ul>
+<h2 id="程序和进程"><a href="#程序和进程" class="headerlink" title="程序和进程"></a>程序和进程</h2><ul>
+<li>进程是程序的一个具体实现.进程可以理解为是程序运行的过程.而同一个程序可以执行多次,每次都可以在内存中独立自己的空间.从而产生多个程序进程.不同的进程还可以拥有各自独立的IO接口.</li>
+<li>而操作系统的一个重要的功能就是为了进程而提供方便.比如为进程分配内存空间,管理进程的相关信息等功能.</li>
+<li>进程可以使用命令ps查看,相关参数自己查看.</li>
+</ul>
+<h2 id="创建进程"><a href="#创建进程" class="headerlink" title="创建进程"></a>创建进程</h2><ul>
+<li>Linux内核只建立了一个init进程.内核并不提供直接建立新进程的系统调用.所有的其他进程都是init进程通过fork机制建立的.也就是说新的线程要通过老的进程自己复制自己得到,而这就是fork.fork是一个系统调用.进程存活于内存中.每个进程都在内存中分配有属于自己的空间.当进程fork的时候,Linux内存中会分配一个新的内存空间给新的进程,并将老的进程空间中的内容复制给新的空间中,然后两个进程同时运行.老进程就是父线程.而新进程就是子进程.</li>
+<li>一个进程除了有PID之外,还会有一个PPID来存储父进程的PID.</li>
+<li>fork通常作为一个系统调用执行.它会有两次返回,将子进程的PID返回给父进程,0返回给子进程.实际上,子进程总是可以通过PPID查询到自己的父进程.</li>
+<li>当一个PID为0的时候,就说明该进程是一个子进程.</li>
+<li>而当一个PID为一个正整数的时候,说明该进程是一个父进程.</li>
+</ul>
+<h2 id="子进程的终结"><a href="#子进程的终结" class="headerlink" title="子进程的终结"></a>子进程的终结</h2><blockquote>
+<p>插入一段自己的理解,可能以后也是为了更正自己或者提醒自己,我未来一定会问我自己为什么是子进程的终结,而没有提到父进程的终结.因为Linux内核提供init进程之后,所有的进程都是init的子进程.所以我的理解就是,没有关闭父进程的情况.还有,若是多进程的话,相对于多个该程序的子进程来讲,是有一个主进程的.所以这个主进程也是一个子进程.(至少目前我是这么认为的)</p>
+</blockquote>
+<ul>
+<li>当一个子进程终结的时候,它就会通知父进程.并且会清空自己在内存中占用的空间,并且在内存中留下自己的退出信息.<ul>
+<li>如果退出顺利的话,这个退出信息为0</li>
+<li>如果退出不顺利的话,这个退出信息为正整数</li>
+</ul>
+</li>
+<li>在这个退出信息中,会解释该进程为什么会退出.</li>
+<li>此时,父进程有有义务对子进程使用wait系统调用.这个wait函数能够从内核中取出子进程的退出信息,并清空该信息在内存中占用的空间.</li>
+<li>但是也有特殊情况.当父进程早于子进程终结的话,子进程就失去了上层关系.成了孤儿进程,而孤儿进程此时会过继给init进程,所以这个时候init进程负责该子进程的wait函数调用.</li>
+<li>还有一种可能性,就是退出的时候退出信息还是会留在内核中,这种就是所谓的僵尸进程.僵尸进程会占用内存空间.</li>
+</ul>
+</div></article></div></main><footer><div class="paginator"><a href="/2017/12/13/cjb6fravg0005hps6nlgnfnl3/" class="prev">PREV</a><a href="/2017/12/10/cjb6fravb0003hps6fi4bkkdl/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2017 <a href="http://ap010gi2e.github.io">ap010gi2e</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>
