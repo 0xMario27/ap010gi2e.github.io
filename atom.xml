@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ap010gi2e.github.io/"/>
-  <updated>2017-12-13T06:56:00.908Z</updated>
+  <updated>2017-12-14T06:56:04.322Z</updated>
   <id>http://ap010gi2e.github.io/</id>
   
   <author>
@@ -17,9 +17,30 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>python subprocess模块的一点笔记</title>
+    <link href="http://ap010gi2e.github.io/2017/12/14/cjb64vvyg0006vqs64ajjn6qh/"/>
+    <id>http://ap010gi2e.github.io/2017/12/14/cjb64vvyg0006vqs64ajjn6qh/</id>
+    <published>2017-12-13T18:10:06.000Z</published>
+    <updated>2017-12-14T06:56:04.322Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="subprocess"><a href="#subprocess" class="headerlink" title="subprocess"></a>subprocess</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在这之前，需要先理解一些其他有关unix的基础概念。一个是进程的基础，一个是Linux文本流的基础。很幸运，之前我已经看过了一些介绍。</p><h2 id="使用时subprocess模块中的函数创建子进程的时候需要注意一下几点"><a href="#使用时subprocess模块中的函数创建子进程的时候需要注意一下几点" class="headerlink" title="使用时subprocess模块中的函数创建子进程的时候需要注意一下几点"></a>使用时<code>subprocess</code>模块中的函数创建子进程的时候需要注意一下几点</h2><ul><li>在创建子进程之后，父进程是否暂停，并等待子进程运行</li><li>函数返回什么</li><li>当returncode不为0的时候，父进程如何处理</li></ul><h2 id="subprocess-call-方法"><a href="#subprocess-call-方法" class="headerlink" title="subprocess.call()方法"></a><code>subprocess.call()</code>方法</h2><blockquote><p>父进程等待子进程完成;返回退出信息(returncode，相当于Linux进程基础中的exitcode)</p></blockquote><h2 id="subprocess-check-call-方法"><a href="#subprocess-check-call-方法" class="headerlink" title="subprocess.check_call()方法"></a><code>subprocess.check_call()</code>方法</h2><blockquote><p>父进程等待子进程完成;检查退出信息，如果returncode不为0，则举出错误<code>subprocess.CalledProcessError</code>，该对象包含有returncode属性，可用<code>try...except...</code>来检查</p></blockquote><h2 id="subprocess-check-output-方法"><a href="#subprocess-check-output-方法" class="headerlink" title="subprocess.check_output()方法"></a><code>subprocess.check_output()</code>方法</h2><blockquote><p>父进程等待子进程完成;返回子进程向标准输出的输出结果;检查退出信息，如果returncode不为0，则举出错误<code>subprocess.CalledProcessError</code>，该对象包含有returncode属性和output属性，output属性为标准输出的输出结果，可用<code>try...except...</code>来检查。</p></blockquote><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>可以接受两种方式执行</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> subprocess</span><br><span class="line">rc = subprocess.call([<span class="string">"ls"</span>,<span class="string">"-l"</span>])</span><br></pre></td></tr></table></figure><blockquote><p>上面这种就是将程序名和所带的参数放在一个列表中一起传入</p></blockquote><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> subprocess</span><br><span class="line">out = subprocess.call(<span class="string">"ls -l"</span>, shell=<span class="keyword">True</span>)</span><br><span class="line">out = subprocess.call(<span class="string">"cd .."</span>, shell=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure><blockquote><p>第二种则是使用了<code>shell=True</code>的参数，这个时候我们可以使用一整个字符串来运行子进程，指示python先运行一个shell，再解释这个命令。</p><p>shell命令中有一些是shell的内建命令，这些命令必须通过shell运行，$cd。shell=True允许我们运行这样一些命令。</p></blockquote><h2 id="使用Popen类"><a href="#使用Popen类" class="headerlink" title="使用Popen类"></a>使用<code>Popen</code>类</h2><blockquote><p>实际上，上面的三个函数都是基于该类进行的封装，当我们想更定制化我们的进程的时候就要去执行<code>Popen</code>类来实现。</p></blockquote><p>* 上面的三个函数已经封装了<code>wait()</code>方法用于主进程阻塞等待子进程的完成。但自己操作<code>Popen</code>类则需要手动去处理这个问题。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> subprocess</span><br><span class="line">child = subprocess.Popen([<span class="string">"ping"</span>,<span class="string">"-c"</span>,<span class="string">"5"</span>,<span class="string">"www.google.com"</span>])</span><br><span class="line">print(<span class="string">"parent process"</span>)</span><br></pre></td></tr></table></figure><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> subprocess</span><br><span class="line">child = subprocess.Popen([<span class="string">"ping"</span>,<span class="string">"-c"</span>,<span class="string">"5"</span>,<span class="string">"www.google.com"</span>])</span><br><span class="line">child.wait()</span><br><span class="line">print(<span class="string">"parent process"</span>)</span><br></pre></td></tr></table></figure><blockquote><p>第一个会不等待子进程执行结束，直接执行<code>print()</code>；第二个则会等待子进程执行完成。</p></blockquote><h2 id="常用的几个方法"><a href="#常用的几个方法" class="headerlink" title="常用的几个方法"></a>常用的几个方法</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">child.poll()           <span class="comment"># 检查子进程状态</span></span><br><span class="line">child.kill()           <span class="comment"># 终止子进程</span></span><br><span class="line">child.send_signal()    <span class="comment"># 向子进程发送信号</span></span><br><span class="line">child.terminate()      <span class="comment"># 终止子进程</span></span><br><span class="line">child.pid              <span class="comment"># 子进程的PID</span></span><br></pre></td></tr></table></figure><h2 id="既然说到了进程，那就肯定可以得到文本流。三个文本流"><a href="#既然说到了进程，那就肯定可以得到文本流。三个文本流" class="headerlink" title="既然说到了进程，那就肯定可以得到文本流。三个文本流"></a>既然说到了进程，那就肯定可以得到文本流。三个文本流</h2><ul><li>child.stdin</li><li>child.stdout</li><li>child.stderr</li></ul><p>我们可以在<code>Popen()</code>建立子进程的时候改变标准输入、标准输出和标准错误，并可以利用<code>subprocess.PIPE</code>将多个子进程的输入和输出连接在一起，构成管道(pipe)</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> subprocess</span><br><span class="line">child1 = subprocess.Popen([<span class="string">"ls"</span>,<span class="string">"-l"</span>], stdout=subprocess.PIPE)</span><br><span class="line">child2 = subprocess.Popen([<span class="string">"wc"</span>], stdin=child1.stdout,stdout=subprocess.PIPE)</span><br><span class="line">out = child2.communicate()</span><br><span class="line">print(out)</span><br></pre></td></tr></table></figure><blockquote><p>child1的<code>stdout</code>将文本输出到管道，随后child2的<code>stdin</code>从该PIPE中将文本读取走。child2的输出文本也被存放在PIPE中，直到<code>communicate()</code>方法从PIPE中读取出PIPE中的文本。</p><p><code>communicate()</code>是Popen对象的一个方法，该方法会阻塞父进程，直到子进程完成。贴一段官方的注释</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""Interact with process: Send data to stdin.  Read data from</span></span><br><span class="line"><span class="string">stdout and stderr, until end-of-file is reached.  Wait for</span></span><br><span class="line"><span class="string">process to terminate.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">The optional "input" argument should be data to be sent to the</span></span><br><span class="line"><span class="string">child process (if self.universal_newlines is True, this should</span></span><br><span class="line"><span class="string">be a string; if it is False, "input" should be bytes), or</span></span><br><span class="line"><span class="string">None, if no data should be sent to the child.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">communicate() returns a tuple (stdout, stderr).  These will be</span></span><br><span class="line"><span class="string">bytes or, if self.universal_newlines was True, a string.</span></span><br><span class="line"><span class="string">"""</span></span><br></pre></td></tr></table></figure></blockquote><p>看完上面官方对还该方法的注释，下面这段代码就应该可以理解了。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> subprocess</span><br><span class="line">child = subprocess.Popen([<span class="string">"cat"</span>], stdin=subprocess.PIPE)</span><br><span class="line">child.communicate(<span class="string">"Hello"</span>)</span><br></pre></td></tr></table></figure><blockquote><p>我们启动子进程之后，<code>cat</code>会等待输入，直到我们用<code>communicate()</code>输入”Hello”。</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;subprocess&quot;&gt;&lt;a href=&quot;#subprocess&quot; class=&quot;headerlink&quot; title=&quot;subprocess&quot;&gt;&lt;/a&gt;subprocess&lt;/h1&gt;&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerli
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>Linux文本流</title>
-    <link href="http://ap010gi2e.github.io/2017/12/13/cjb4pd50t0005ces61kji8r46/"/>
-    <id>http://ap010gi2e.github.io/2017/12/13/cjb4pd50t0005ces61kji8r46/</id>
+    <link href="http://ap010gi2e.github.io/2017/12/13/cjb64vvy90005vqs6wpenzklz/"/>
+    <id>http://ap010gi2e.github.io/2017/12/13/cjb64vvy90005vqs6wpenzklz/</id>
     <published>2017-12-12T16:44:09.000Z</published>
     <updated>2017-12-13T06:56:00.908Z</updated>
     
@@ -39,8 +60,8 @@
   
   <entry>
     <title>Linux进程基础</title>
-    <link href="http://ap010gi2e.github.io/2017/12/12/cjb4pd50s0004ces6b399iegt/"/>
-    <id>http://ap010gi2e.github.io/2017/12/12/cjb4pd50s0004ces6b399iegt/</id>
+    <link href="http://ap010gi2e.github.io/2017/12/12/cjb64vvy80004vqs6nc8dm5hl/"/>
+    <id>http://ap010gi2e.github.io/2017/12/12/cjb64vvy80004vqs6nc8dm5hl/</id>
     <published>2017-12-12T15:22:35.000Z</published>
     <updated>2017-12-12T15:50:33.658Z</updated>
     
@@ -61,8 +82,8 @@
   
   <entry>
     <title>文件描述符</title>
-    <link href="http://ap010gi2e.github.io/2017/12/10/cjb4pd50o0001ces6l6qpiso1/"/>
-    <id>http://ap010gi2e.github.io/2017/12/10/cjb4pd50o0001ces6l6qpiso1/</id>
+    <link href="http://ap010gi2e.github.io/2017/12/10/cjb64vvy20001vqs6b8w5vw42/"/>
+    <id>http://ap010gi2e.github.io/2017/12/10/cjb64vvy20001vqs6b8w5vw42/</id>
     <published>2017-12-10T12:35:54.000Z</published>
     <updated>2017-12-10T13:09:57.352Z</updated>
     
@@ -84,8 +105,8 @@
   
   <entry>
     <title>同步、异步、阻塞、非阻塞</title>
-    <link href="http://ap010gi2e.github.io/2017/12/10/cjb4pd50k0000ces64bhomwxj/"/>
-    <id>http://ap010gi2e.github.io/2017/12/10/cjb4pd50k0000ces64bhomwxj/</id>
+    <link href="http://ap010gi2e.github.io/2017/12/10/cjb64vvxy0000vqs65heriki7/"/>
+    <id>http://ap010gi2e.github.io/2017/12/10/cjb64vvxy0000vqs65heriki7/</id>
     <published>2017-12-10T09:20:42.000Z</published>
     <updated>2017-12-10T13:10:03.070Z</updated>
     
@@ -108,8 +129,8 @@
   
   <entry>
     <title>进程和线程</title>
-    <link href="http://ap010gi2e.github.io/2017/12/10/cjb4pd50r0003ces6ge0wtbnd/"/>
-    <id>http://ap010gi2e.github.io/2017/12/10/cjb4pd50r0003ces6ge0wtbnd/</id>
+    <link href="http://ap010gi2e.github.io/2017/12/10/cjb64vvy40003vqs6qve8bi5q/"/>
+    <id>http://ap010gi2e.github.io/2017/12/10/cjb64vvy40003vqs6qve8bi5q/</id>
     <published>2017-12-10T06:49:24.000Z</published>
     <updated>2017-12-10T13:10:07.016Z</updated>
     
@@ -131,8 +152,8 @@
   
   <entry>
     <title>进、线程间通信</title>
-    <link href="http://ap010gi2e.github.io/2017/12/10/cjb4pd50q0002ces6nang8gi0/"/>
-    <id>http://ap010gi2e.github.io/2017/12/10/cjb4pd50q0002ces6nang8gi0/</id>
+    <link href="http://ap010gi2e.github.io/2017/12/10/cjb64vvy30002vqs6vfdcsemr/"/>
+    <id>http://ap010gi2e.github.io/2017/12/10/cjb64vvy30002vqs6vfdcsemr/</id>
     <published>2017-12-10T05:12:58.000Z</published>
     <updated>2017-12-10T13:10:10.117Z</updated>
     
